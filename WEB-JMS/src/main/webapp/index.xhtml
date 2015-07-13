@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <script name="jquery/jquery.js" library="primefaces"></script>
+    <title>Registrar Alumno</title>
+</h:head>
+<h:form>
+    <p:growl id="messages"></p:growl>
+    <p:panelGrid columns="2">
+        <p:outputLabel value="Nombre:"></p:outputLabel>
+        <p:inputText value="#{alumnoController.alumno.nombre}"></p:inputText>
+        <p:outputLabel value="Apellido Paterno:"></p:outputLabel>
+        <p:inputText value="#{alumnoController.alumno.apellidoPaterno}"></p:inputText>
+        <p:outputLabel value="Apellido Materno:"></p:outputLabel>
+        <p:inputText value="#{alumnoController.alumno.apellidoMaterno}"></p:inputText>
+        <p:outputLabel value="Matricula:"></p:outputLabel>
+        <p:inputText value="#{alumnoController.alumno.matricula}"></p:inputText>
+    </p:panelGrid>
+
+    <p:dataTable id="dataTableAlumno" var="alumno" value="#{alumnoController.alumnos}">
+        <p:column headerText="ID ALUMNO">
+            <h:outputText value="#{alumno.idAlumno}" />
+        </p:column>
+
+        <p:column headerText="NOMBRE">
+            <h:outputText value="#{alumno.nombre}" />
+        </p:column>
+
+        <p:column headerText="APELLIDO PATERNO">
+            <h:outputText value="#{alumno.apellidoPaterno}" />
+        </p:column>
+
+        <p:column headerText="APELLIDO MATERNO">
+            <h:outputText value="#{alumno.apellidoMaterno}" />
+        </p:column>
+
+        <p:column headerText="Matricula">
+            <h:outputText value="#{alumno.matricula}" />
+        </p:column>
+    </p:dataTable>
+
+    <p:commandButton value="Registrar" action="#{alumnoController.registrar}" update="messages, dataTableAlumno"></p:commandButton>
+</h:form>
+</html>

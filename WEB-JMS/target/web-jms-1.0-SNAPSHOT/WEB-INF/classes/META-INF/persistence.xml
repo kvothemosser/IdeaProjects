@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="jpa-persistence" transaction-type="RESOURCE_LOCAL">
+        <class>com.sistemas.distribuidos.entidad.Alumno</class>
+        <properties>
+            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/sistemas"/>
+            <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="eclipselink.jdbc.user" value="uam"/>
+            <property name="eclipselink.jdbc.password" value="password"/>
+        </properties>
+    </persistence-unit>
+</persistence>

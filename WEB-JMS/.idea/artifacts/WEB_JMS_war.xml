@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="WEB-JMS:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="web-jms-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="WEB-JMS:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="javax.json.processing-1.0" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
