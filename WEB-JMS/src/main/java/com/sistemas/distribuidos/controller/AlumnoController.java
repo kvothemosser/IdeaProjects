@@ -1,5 +1,6 @@
 package com.sistemas.distribuidos.controller;
 
+import com.sistemas.distribuidos.entidad.Alumno;
 import com.sistemas.distribuidos.servicios.AlumnoService;
 
 import javax.annotation.PostConstruct;
@@ -8,9 +9,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
-import com.sistemas.distribuidos.entidad.Alumno;
-
 import java.util.List;
 
 /**
@@ -36,10 +34,11 @@ public class AlumnoController {
     public String registrar(){
         alumnoService.saveAlumno(alumno);
         FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage("El Alumno "+ this.alumno.getNombre() + " " +
+                new FacesMessage("El Alumno " + this.alumno.getNombre() + " " +
                         this.alumno.getApellidoPaterno() + this.alumno.getApellidoMaterno() +
                         " ha sido registrado con exito."));
         obtenerTodos();
+        alumno = new Alumno();
         return "";
     }
 

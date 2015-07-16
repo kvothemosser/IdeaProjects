@@ -1,23 +1,33 @@
 package com.sistemas.distribuidos.entidad;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Moises Tapia Tellez on 12/07/2015.
  */
 @Entity
 public class Alumno {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID_ALUMNO", nullable = false, insertable = true, updatable = true)
     private int idAlumno;
+
+    @Basic
+    @Column(name = "NOMBRE", nullable = false, insertable = true, updatable = true, length = 100)
     private String nombre;
+
+    @Basic
+    @Column(name = "APELLIDO_PATERNO", nullable = false, insertable = true, updatable = true, length = 100)
     private String apellidoPaterno;
+
+    @Basic
+    @Column(name = "APELLIDO_MATERNO", nullable = true, insertable = true, updatable = true, length = 100)
     private String apellidoMaterno;
+
+    @Basic
+    @Column(name = "MATRICULA", nullable = false, insertable = true, updatable = true, length = 10)
     private String matricula;
 
-    @Id
-    @Column(name = "ID_ALUMNO", nullable = false, insertable = true, updatable = true)
     public int getIdAlumno() {
         return idAlumno;
     }
@@ -26,8 +36,6 @@ public class Alumno {
         this.idAlumno = idAlumno;
     }
 
-    @Basic
-    @Column(name = "NOMBRE", nullable = false, insertable = true, updatable = true, length = 100)
     public String getNombre() {
         return nombre;
     }
@@ -36,8 +44,6 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    @Basic
-    @Column(name = "APELLIDO_PATERNO", nullable = false, insertable = true, updatable = true, length = 100)
     public String getApellidoPaterno() {
         return apellidoPaterno;
     }
@@ -46,8 +52,6 @@ public class Alumno {
         this.apellidoPaterno = apellidoPaterno;
     }
 
-    @Basic
-    @Column(name = "APELLIDO_MATERNO", nullable = true, insertable = true, updatable = true, length = 100)
     public String getApellidoMaterno() {
         return apellidoMaterno;
     }
@@ -56,8 +60,6 @@ public class Alumno {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    @Basic
-    @Column(name = "MATRICULA", nullable = false, insertable = true, updatable = true, length = 10)
     public String getMatricula() {
         return matricula;
     }
