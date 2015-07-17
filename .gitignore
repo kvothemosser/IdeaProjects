@@ -45,3 +45,9 @@ WEB-JMS/.idea/artifacts/WEB_JMS_war.xml
 WEB-JMS/.idea/artifacts/WEB_JMS_war.xml
 *.class
 *.class
+WEB-JMS/.idea/artifacts/WEB_JMS_war.xml
+WEB-JMS/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml
+WEB-JMS/.idea/libraries/Maven__log4j_log4j_1_2_15.xml
+WEB-JMS/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_5_8.xml
+WEB-JMS/target/classes/com/sistemas/distribuidos/controller/AlumnoController.class
+*.class
