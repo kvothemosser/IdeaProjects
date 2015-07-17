@@ -33,7 +33,7 @@ public class AlumnoController extends BaseController {
         try {
             alumnoService.saveAlumno(a);
         } catch (Exception e) {
-            LOGGER.error("No se pudo inicializar un alumno", e);
+            this.LOGGER.error("No se pudo inicializar un alumno", e);
         }
         this.alumno = new Alumno();
         try {

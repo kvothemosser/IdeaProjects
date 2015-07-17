@@ -9,17 +9,17 @@
 </h:head>
 <h:form>
     <p:growl id="messages" autoUpdate="true"></p:growl>
-    <p:panelGrid columns="2" layout="grid">
-        <p:outputLabel value="Usuario" style="float: right"/>
-        <p:inputText value="#{usuarioController.usuario.usuario}" required="true"
-                     requiredMessage="Es necesario ingresar usuario"></p:inputText>
-        <p:outputLabel value="Password" style="float: right"/>
-        <p:password value="#{usuarioController.usuario.password}" required="true"
-                    requiredMessage="Es necesario ingresar el password"></p:password>
-
-        <p:column colspan="2" style="text-align:center !important">
-            <p:commandButton value="Loggearse" action="#{usuarioController.autentificar}"></p:commandButton>
-        </p:column>
-    </p:panelGrid>
+    <p:panel id="basic" header="Registro de Alumnos" footer="P&aacute;gina de login al Sistema" style="margin-bottom:20px">
+        <p:panelGrid  columns="2" layout="grid">
+            <p:outputLabel value="Usuario: " style="float: right"/>
+            <p:inputText value="#{usuarioController.usuario.usuario}" required="true"
+                         requiredMessage="Es necesario ingresar usuario"></p:inputText>
+            <p:outputLabel value="Password: " style="float: right"/>
+            <p:password value="#{usuarioController.usuario.password}" required="true"
+                        requiredMessage="Es necesario ingresar el password"></p:password>
+            <p:outputLabel value="" style="float: right"/>
+            <p:commandButton value="Ingresar" action="#{usuarioController.autentificar}"></p:commandButton>
+        </p:panelGrid>
+    </p:panel>
 </h:form>
 </html>

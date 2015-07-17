@@ -23,25 +23,13 @@ public class UsuarioController extends BaseController {
     @PostConstruct
     void init() {
         setUsuario(new Usuario());
-        try {
-            Usuario u = new Usuario();
-            u.setNombre("ADMIN");
-            u.setApellidoPaterno("ADMIN");
-            u.setApellidoMaterno("ADMIN");
-            u.setUsuario("admin");
-            u.setPassword("admin");
-            usuarioService.saveUsuario(u);
-        } catch (Exception e) {
-            this.addFacesError("No se pudo guardar el usuario Administrador");
-            LOGGER.error("No se pudo guardar el usuario Administrador", e);
-        }
     }
 
     public String autentificar() {
         String url = "";
         try {
             Usuario usuarioEncontrado = usuarioService.findByUsername(getUsuario().getUsuario());
-            if (usuarioEncontrado != null && !usuarioEncontrado.getPassword().equals(getUsuario().getPassword())) {
+            if (usuarioEncontrado != null && usuarioEncontrado.getPassword().equals(getUsuario().getPassword())) {
                 url = "pages/registro-alumno?faces-redirect=true";
             } else {
                 this.addFacesInfo("Usuario/Password incorrectos");

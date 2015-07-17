@@ -26,6 +26,15 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>cupertino</param-value>
     </context-param>
+    <servlet>
+        <servlet-name>CargaInicial</servlet-name>
+        <servlet-class>com.sistemas.distribuidos.carga.CargaInicial</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CargaInicial</servlet-name>
+        <url-pattern>/CargaInicial</url-pattern>
+    </servlet-mapping>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
