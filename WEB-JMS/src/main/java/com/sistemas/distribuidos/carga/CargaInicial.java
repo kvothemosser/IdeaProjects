@@ -1,11 +1,12 @@
 package com.sistemas.distribuidos.carga;
 
-import com.sistemas.distribuidos.dao.UsuarioDAO;
+import com.sistemas.distribuidos.constante.Nombre;
+import com.sistemas.distribuidos.entidad.Alumno;
 import com.sistemas.distribuidos.entidad.Usuario;
 import com.sistemas.distribuidos.logger.Log4jWrapper;
+import com.sistemas.distribuidos.servicios.AlumnoService;
 import com.sistemas.distribuidos.servicios.UsuarioService;
 import org.apache.log4j.Logger;
-import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -16,6 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by Moises Tapia Tellez on 16/07/2015.
@@ -27,6 +33,9 @@ public class CargaInicial extends HttpServlet {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private AlumnoService alumnoService;
+
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
@@ -35,7 +44,9 @@ public class CargaInicial extends HttpServlet {
     }
 
     public void actualizarParametros() {
-        System.out.println("---------------------------------------------------------------------------------");
+        DateFormat df = new SimpleDateFormat("yyMMddHHmmss");
+        int SIZE = 99;
+        Random RANDOM = new Random();
         try {
             Usuario u = new Usuario();
             u.setNombre("ADMIN");
@@ -44,10 +55,20 @@ public class CargaInicial extends HttpServlet {
             u.setUsuario("admin");
             u.setPassword("admin");
             usuarioService.saveUsuario(u);
+            for (int i = 0; i < 25; i++) {
+                Calendar c = Calendar.getInstance();
+                c.add(Calendar.DAY_OF_YEAR, RANDOM.nextInt());
+                c.add(Calendar.SECOND, RANDOM.nextInt());
+                Date today = c.getTime();
+                Alumno alumno = new Alumno(Nombre.randomNombre().getNombre(),
+                        Nombre.randomNombre().getNombre(),
+                        Nombre.randomNombre().getNombre(),
+                        df.format(today));
+                alumnoService.saveAlumno(alumno);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("---------------------------------------------------------------------------------");
     }
 
     @Override

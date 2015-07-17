@@ -22,19 +22,10 @@ public class AlumnoController extends BaseController {
 
     private List<Alumno> alumnos;
 
+    private String matriculaBorrar;
 
     @PostConstruct
     void init(){
-        Alumno a = new Alumno();
-        a.setNombre("Moises");
-        a.setApellidoPaterno("Tapia");
-        a.setApellidoMaterno("Tellez");
-        a.setMatricula("2043");
-        try {
-            alumnoService.saveAlumno(a);
-        } catch (Exception e) {
-            this.LOGGER.error("No se pudo inicializar un alumno", e);
-        }
         this.alumno = new Alumno();
         try {
             this.setAlumnos(alumnoService.findAll());
@@ -46,10 +37,12 @@ public class AlumnoController extends BaseController {
 
     public String registrar(){
         try {
-            alumnoService.saveAlumno(alumno);
-            this.addFacesInfo("El Alumno " + this.alumno.getNombre() + " " +
-                    this.alumno.getApellidoPaterno() + this.alumno.getApellidoMaterno() +
-                    " ha sido registrado con exito.");
+            if (validarRegistro()) {
+                alumnoService.saveAlumno(alumno);
+                this.addFacesInfo("El Alumno " + this.alumno.getNombre() + " " +
+                        this.alumno.getApellidoPaterno() + this.alumno.getApellidoMaterno() +
+                        " ha sido registrado con exito.");
+            }
         } catch (Exception e) {
             this.addFacesError("No se pudo guardar el Alumno");
             LOGGER.error("No se pudo guardar el Alumno", e);
@@ -59,12 +52,41 @@ public class AlumnoController extends BaseController {
         return "";
     }
 
+    private Boolean validarRegistro() {
+        Boolean validacion = Boolean.FALSE;
+        if ("".equals(alumno.getNombre())) {
+            this.addFacesError("Debe ingresar el nombre del alumno");
+        } else if ("".equals(alumno.getApellidoPaterno())) {
+            this.addFacesError("Debe ingresar el primer apellido del alumno");
+        } else if ("".equals(alumno.getMatricula())) {
+            this.addFacesError("Debe ingresar la matricula del alumno");
+        } else {
+            validacion = Boolean.TRUE;
+        }
+        return validacion;
+    }
+
     public void obtenerTodos(){
         try {
             setAlumnos(alumnoService.findAll());
         } catch (Exception e) {
             this.addFacesError("No se pudo cargar la lista de Alumnos");
             LOGGER.error("No se pudo cargar la lista de Alumnos", e);
+        }
+    }
+
+    public void borrarPorMatricula() {
+        if (matriculaBorrar != null && !matriculaBorrar.isEmpty()) {
+            try {
+                alumnoService.deleteByMatricula(matriculaBorrar);
+                obtenerTodos();
+                matriculaBorrar = "";
+            } catch (Exception e) {
+                LOGGER.error("Tiene poderes de superusuario, no se puede borrar", e);
+                addFacesError("Tiene poderes de superusuario, no se puede borrar");
+            }
+        } else {
+            this.addFacesInfo("Se necesita una matricula para borrar al Alumno");
         }
     }
 
@@ -90,5 +112,13 @@ public class AlumnoController extends BaseController {
 
     public void setAlumnos(List<Alumno> alumnos) {
         this.alumnos = alumnos;
+    }
+
+    public String getMatriculaBorrar() {
+        return matriculaBorrar;
+    }
+
+    public void setMatriculaBorrar(String matriculaBorrar) {
+        this.matriculaBorrar = matriculaBorrar;
     }
 }

@@ -25,8 +25,19 @@ public class Alumno {
     private String apellidoMaterno;
 
     @Basic
-    @Column(name = "MATRICULA", nullable = false, insertable = true, updatable = true, length = 10)
+    @Column(name = "MATRICULA", nullable = false, insertable = true, updatable = true, length = 17)
     private String matricula;
+
+    public Alumno() {
+
+    }
+
+    public Alumno(String nombre, String apellidoPaterno, String apellidoMaterno, String matricula) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.matricula = matricula;
+    }
 
     public int getIdAlumno() {
         return idAlumno;

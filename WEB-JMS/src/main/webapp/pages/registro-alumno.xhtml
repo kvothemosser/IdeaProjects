@@ -9,40 +9,56 @@
 </h:head>
     <h:form>
         <p:growl id="messages"></p:growl>
-        <p:panelGrid columns="2">
-            <p:outputLabel value="Nombre:"></p:outputLabel>
-            <p:inputText value="#{alumnoController.alumno.nombre}"></p:inputText>
-            <p:outputLabel value="Apellido Paterno:"></p:outputLabel>
-            <p:inputText value="#{alumnoController.alumno.apellidoPaterno}"></p:inputText>
-            <p:outputLabel value="Apellido Materno:"></p:outputLabel>
-            <p:inputText value="#{alumnoController.alumno.apellidoMaterno}"></p:inputText>
-            <p:outputLabel value="Matricula:"></p:outputLabel>
-            <p:inputText value="#{alumnoController.alumno.matricula}"></p:inputText>
-        </p:panelGrid>
+        <p:panel id="basico" header="Datos del Alumno a ser registrado" footer="Se deben introducir los datos con *"
+                 style="margin-bottom:20px; align-content: center">
+            <p:panelGrid id="panelGridBasico" style="width: 100%" columns="2">
+                <p:panelGrid id="panelGridRegistro" style="width: 100%" columns="2">
+                    <p:outputLabel value="*Nombre:"></p:outputLabel>
+                    <p:inputText value="#{alumnoController.alumno.nombre}"></p:inputText>
+                    <p:outputLabel value="*Apellido Paterno:"></p:outputLabel>
+                    <p:inputText value="#{alumnoController.alumno.apellidoPaterno}"></p:inputText>
+                    <p:outputLabel value="Apellido Materno:"></p:outputLabel>
+                    <p:inputText value="#{alumnoController.alumno.apellidoMaterno}"></p:inputText>
+                    <p:outputLabel value="*Matricula:"></p:outputLabel>
+                    <p:inputText value="#{alumnoController.alumno.matricula}"></p:inputText>
+                    <p:outputLabel value=""></p:outputLabel>
+                    <p:commandButton value="Registrar" action="#{alumnoController.registrar}"
+                                     update="messages, dataTableAlumno"></p:commandButton>
+                </p:panelGrid>
+                <p:panelGrid id="panelGridBorrado" style="width: 100%" columns="2">
+                    <p:outputLabel value="*Matricula:"></p:outputLabel>
+                    <p:inputText value="#{alumnoController.matriculaBorrar}"></p:inputText>
+                    <p:outputLabel value=""></p:outputLabel>
+                    <p:commandButton id="matriculaBorrar" value="Borrar" action="#{alumnoController.borrarPorMatricula}"
+                                     update="messages, dataTableAlumno, matriculaBorrar"></p:commandButton>
+                </p:panelGrid>
+            </p:panelGrid>
+        </p:panel>
+        <p:panel id="panelDataTableAlumno" header="Alumnos actualmente registrados" footer=""
+                 style="margin-bottom:20px; align-content: center">
+            <p:dataTable id="dataTableAlumno" var="alumno" value="#{alumnoController.alumnos}" rows="5" paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                <p:column headerText="ID ALUMNO" sortBy="#{alumno.idAlumno}">
+                    <h:outputText value="#{alumno.idAlumno}"/>
+                </p:column>
 
-        <p:dataTable id="dataTableAlumno" var="alumno" value="#{alumnoController.alumnos}">
-            <p:column headerText="ID ALUMNO">
-                <h:outputText value="#{alumno.idAlumno}"/>
-            </p:column>
+                <p:column headerText="NOMBRE" sortBy="#{alumno.nombre}">
+                    <h:outputText value="#{alumno.nombre}"/>
+                </p:column>
 
-            <p:column headerText="NOMBRE">
-                <h:outputText value="#{alumno.nombre}"/>
-            </p:column>
+                <p:column headerText="APELLIDO PATERNO" sortBy="#{alumno.apellidoPaterno}">
+                    <h:outputText value="#{alumno.apellidoPaterno}"/>
+                </p:column>
 
-            <p:column headerText="APELLIDO PATERNO">
-                <h:outputText value="#{alumno.apellidoPaterno}"/>
-            </p:column>
+                <p:column headerText="APELLIDO MATERNO" sortBy="#{alumno.apellidoMaterno}">
+                    <h:outputText value="#{alumno.apellidoMaterno}"/>
+                </p:column>
 
-            <p:column headerText="APELLIDO MATERNO">
-                <h:outputText value="#{alumno.apellidoMaterno}"/>
-            </p:column>
-
-            <p:column headerText="Matricula">
-                <h:outputText value="#{alumno.matricula}"/>
-            </p:column>
-        </p:dataTable>
-
-        <p:commandButton value="Registrar" action="#{alumnoController.registrar}"
-                         update="messages, dataTableAlumno"></p:commandButton>
+                <p:column headerText="Matricula" sortBy="#{alumno.matricula}">
+                    <h:outputText value="#{alumno.matricula}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
     </h:form>
 </html>
