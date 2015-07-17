@@ -4,11 +4,9 @@ import com.sistemas.distribuidos.entidad.Alumno;
 import com.sistemas.distribuidos.servicios.AlumnoService;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import java.util.List;
 
 /**
@@ -16,7 +14,7 @@ import java.util.List;
  */
 @ManagedBean(name = "alumnoController")
 @SessionScoped
-public class AlumnoController {
+public class AlumnoController extends BaseController {
     @ManagedProperty("#{alumnoService}")
     private AlumnoService alumnoService;
 
@@ -27,23 +25,47 @@ public class AlumnoController {
 
     @PostConstruct
     void init(){
+        Alumno a = new Alumno();
+        a.setNombre("Moises");
+        a.setApellidoPaterno("Tapia");
+        a.setApellidoMaterno("Tellez");
+        a.setMatricula("2043");
+        try {
+            alumnoService.saveAlumno(a);
+        } catch (Exception e) {
+            LOGGER.error("No se pudo inicializar un alumno", e);
+        }
         this.alumno = new Alumno();
-        this.setAlumnos(alumnoService.findAll());
+        try {
+            this.setAlumnos(alumnoService.findAll());
+        } catch (Exception e) {
+            this.addFacesError("No se pudo cargar la lista de alumnos");
+            LOGGER.error("No se pudo cargar la lista de alumnos", e);
+        }
     }
 
     public String registrar(){
-        alumnoService.saveAlumno(alumno);
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage("El Alumno " + this.alumno.getNombre() + " " +
-                        this.alumno.getApellidoPaterno() + this.alumno.getApellidoMaterno() +
-                        " ha sido registrado con exito."));
+        try {
+            alumnoService.saveAlumno(alumno);
+            this.addFacesInfo("El Alumno " + this.alumno.getNombre() + " " +
+                    this.alumno.getApellidoPaterno() + this.alumno.getApellidoMaterno() +
+                    " ha sido registrado con exito.");
+        } catch (Exception e) {
+            this.addFacesError("No se pudo guardar el Alumno");
+            LOGGER.error("No se pudo guardar el Alumno", e);
+        }
         obtenerTodos();
         alumno = new Alumno();
         return "";
     }
 
     public void obtenerTodos(){
-        setAlumnos(alumnoService.findAll());
+        try {
+            setAlumnos(alumnoService.findAll());
+        } catch (Exception e) {
+            this.addFacesError("No se pudo cargar la lista de Alumnos");
+            LOGGER.error("No se pudo cargar la lista de Alumnos", e);
+        }
     }
 
     public AlumnoService getAlumnoService() {

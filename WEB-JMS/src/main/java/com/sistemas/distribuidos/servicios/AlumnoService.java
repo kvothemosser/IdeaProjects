@@ -18,23 +18,23 @@ public class AlumnoService {
     @Autowired
     private AlumnoDAO alumnoDAO;
 
-    public void saveAlumno(Alumno alumno){
+    public void saveAlumno(Alumno alumno) throws Exception {
         alumnoDAO.saveAlumno(alumno);
     }
 
-    public void updateAlumno(Alumno alumno){
+    public void updateAlumno(Alumno alumno) throws Exception {
         alumnoDAO.updateAlumno(alumno);
     }
 
-    public List<Alumno> findAll(){
+    public List<Alumno> findAll() throws Exception {
         return alumnoDAO.findAll();
     }
 
-    public List<Alumno> findByMatricula(String matricula){
+    public List<Alumno> findByMatricula(String matricula) throws Exception {
         return alumnoDAO.findByMatricula(matricula);
     }
 
-    public void deleteByMatricula(String matricula){
+    public void deleteByMatricula(String matricula) throws Exception {
         alumnoDAO.deleteByMatricula(matricula);
     }
 }

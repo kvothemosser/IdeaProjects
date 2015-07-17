@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface UsuarioDAO {
 
-    void saveUsuario(Usuario usuario);
+    void saveUsuario(Usuario usuario) throws Exception;
 
-    void updateUsuario(Usuario usuario);
+    void updateUsuario(Usuario usuario) throws Exception;
 
-    List<Usuario> findAll();
+    List<Usuario> findAll() throws Exception;
 
-    List<Usuario> findByUsername(String username);
+    Usuario findByUsername(String username) throws Exception;
 
-    void deleteByUsername(String username);
+    void deleteByUsername(String username) throws Exception;
 }

@@ -15,11 +15,11 @@ public abstract class AbstractDAO {
         return sessionFactory.getCurrentSession();
     }
 
-    public void persist(Object entity) {
+    public void persist(Object entity) throws Exception {
         getSession().persist(entity);
     }
 
-    public void delete(Object entity) {
+    public void delete(Object entity) throws Exception {
         getSession().delete(entity);
     }
 }

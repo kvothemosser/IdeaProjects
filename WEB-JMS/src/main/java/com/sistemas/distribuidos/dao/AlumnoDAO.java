@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface AlumnoDAO {
 
-    void saveAlumno(Alumno alumno);
+    void saveAlumno(Alumno alumno) throws Exception;
 
-    void updateAlumno(Alumno alumno);
+    void updateAlumno(Alumno alumno) throws Exception;
 
-    List<Alumno> findAll();
+    List<Alumno> findAll() throws Exception;
 
-    List<Alumno> findByMatricula(String matricula);
+    List<Alumno> findByMatricula(String matricula) throws Exception;
 
-    void deleteByMatricula(String matricula);
+    void deleteByMatricula(String matricula) throws Exception;
 }

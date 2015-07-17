@@ -15,32 +15,32 @@ import java.util.List;
 public class UsuarioDAOImpl extends AbstractDAO implements UsuarioDAO {
 
     @Override
-    public void saveUsuario(Usuario usuario) {
+    public void saveUsuario(Usuario usuario) throws Exception {
         persist(usuario);
     }
 
     @Override
-    public void updateUsuario(Usuario usuario) {
+    public void updateUsuario(Usuario usuario) throws Exception {
         getSession().update(usuario);
     }
 
     @Override
-    public List<Usuario> findAll() {
+    public List<Usuario> findAll() throws Exception {
         Criteria criteria = getSession().createCriteria(Usuario.class);
         return (List<Usuario>) criteria.list();
     }
 
     @Override
-    public List<Usuario> findByUsername(String username) {
+    public Usuario findByUsername(String usuario) throws Exception {
         Criteria criteria = getSession().createCriteria(Usuario.class);
-        criteria.add(Restrictions.eq("username", username));
-        return (List<Usuario>) criteria.list();
+        criteria.add(Restrictions.eq("usuario", usuario));
+        return (Usuario) criteria.uniqueResult();
     }
 
     @Override
-    public void deleteByUsername(String username) {
-        Query query = getSession().createSQLQuery("delete from Usuario where username = :username");
-        query.setString("username", username);
+    public void deleteByUsername(String usuario) throws Exception {
+        Query query = getSession().createSQLQuery("delete from Usuario where usuario = :usuario");
+        query.setString("usuario", usuario);
         query.executeUpdate();
     }
 }

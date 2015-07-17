@@ -17,23 +17,23 @@ public class UsuarioService {
     @Autowired
     private UsuarioDAO usuarioDAO;
 
-    public void saveUsuario(Usuario usuario) {
+    public void saveUsuario(Usuario usuario) throws Exception {
         usuarioDAO.saveUsuario(usuario);
     }
 
-    public void updateUsuario(Usuario usuario) {
+    public void updateUsuario(Usuario usuario) throws Exception {
         usuarioDAO.updateUsuario(usuario);
     }
 
-    public List<Usuario> findAll() {
+    public List<Usuario> findAll() throws Exception {
         return usuarioDAO.findAll();
     }
 
-    public List<Usuario> findByUsername(String username) {
+    public Usuario findByUsername(String username) throws Exception {
         return usuarioDAO.findByUsername(username);
     }
 
-    public void deleteByUsername(String username) {
+    public void deleteByUsername(String username) throws Exception {
         usuarioDAO.deleteByUsername(username);
     }
 }
