@@ -4,8 +4,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
-import java.util.Properties;
-
 
 /**
  * Wrapper para los logs. Lee el archivo configuracion.properties que se debe encontar en el modulo EJB del proyecto.
@@ -19,9 +17,7 @@ public final class Log4jWrapper {
 
     static {
         try {
-            Properties ruta = new Properties();
-            ruta.load(Log4jWrapper.class.getClassLoader().getResourceAsStream("/configuracion.properties"));
-            DOMConfigurator.configure(ruta.getProperty("ruta.log4j"));
+            DOMConfigurator.configure("/application.properties");
         } catch (Exception e) {
             LOGGER.warn("No se pudo cargar el archivo externo de configuracion del log. Se usara el default", e);
         }
